@@ -81,3 +81,5 @@ export const FoodCard = ({
     </div>
   );
 };
+
+//type

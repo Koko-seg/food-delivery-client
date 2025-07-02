@@ -1,5 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { OrderSheetCart, OrderSheetOrders, OrderSheetPayment } from ".";
+import {
+  OrderSheetCart,
+  OrderSheetFoodItem,
+  OrderSheetOrders,
+  OrderSheetPayment,
+} from ".";
 
 export const OrderSheetContents = ({
   openModal,

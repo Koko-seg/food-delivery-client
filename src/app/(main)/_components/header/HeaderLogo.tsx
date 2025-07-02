@@ -11,8 +11,8 @@ export const HeaderLogo = ({
 
       <div>
         <div className="flex text-xl font-semibold text-black">
-          <p style={{ color: textColor[0] }}>Nom</p>
-          <p style={{ color: textColor[1] }}>Nom</p>
+          <p style={{ color: textColor[0] }}>Koko's</p>
+          <p style={{ color: textColor[1] }}>Corner</p>
         </div>
         <p style={{ color: textColor[2] }} className="text-xs">
           Swift delivery

@@ -1,7 +1,12 @@
 import { Badge } from "@/components/ui/badge";
+import { FoodItem } from "@/types/types";
 import { Map, Soup, Timer } from "lucide-react";
 
-export const OrderSheetOrderItem = () => {
+type OrderSheetOrderItemProps = {
+  food: FoodItem;
+};
+
+export const OrderSheetOrderItem = ({ food }: OrderSheetOrderItemProps) => {
   return (
     <div className="space-y-3">
       <div className="flex item-center justify-between">
@@ -15,7 +20,7 @@ export const OrderSheetOrderItem = () => {
       <div className="flex item-center justify-between">
         <div className="flex item-center gap-2">
           <Soup strokeWidth={1} size={16} />
-          <p className="text-muted-foreground text-xs">Sunshine Stackers</p>
+          <p className="text-muted-foreground text-xs">{food?.foodName}</p>
         </div>
         <p className="text-muted-foreground text-xs">x 1</p>
       </div>

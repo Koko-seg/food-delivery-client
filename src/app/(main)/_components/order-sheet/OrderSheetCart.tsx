@@ -1,15 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrderSheetEmptyCard } from "./OrderSheetEmptyCard";
 import { OrderSheetFoodItem } from "./OrderSheetFoodItem";
+import { Category, Food } from "@/types/types";
 
 export const cartData = [
   {
     food: {
-      _id: "1",
-      foodName: "foodName",
-      price: 1200,
+      _id: 1,
+      foodName: "",
+      price: "",
       image: "",
-      ingredients: "ingredients ingredients",
+      ingredients: "",
       categoryId: {
         _id: "1",
         categoryName: "categoryName",
@@ -20,7 +21,12 @@ export const cartData = [
     quantity: 1,
   },
 ];
-export const OrderSheetCart = () => {
+
+type OrderSheetCartProps = {
+  food: Category;
+};
+
+export const OrderSheetCart = ({ food }: OrderSheetCartProps) => {
   const renderFoodCard = () => {
     if (cartData?.length) {
       return cartData?.map((item) => {

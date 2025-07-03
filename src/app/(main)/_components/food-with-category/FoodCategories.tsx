@@ -9,7 +9,7 @@ export const FoodCategories = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      const response = await fetch("http://localhost:3800/category");
+      const response = await fetch("http://localhost:3800/category/");
       const data = await response.json();
       console.log(data);
 
@@ -18,7 +18,7 @@ export const FoodCategories = () => {
     getCategories();
   }, []);
 
-  if (!categories.length)
+  if (!categories?.length)
     return <p className="text-white">No categories found</p>;
 
   return (

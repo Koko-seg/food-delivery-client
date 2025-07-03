@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrderSheetEmptyCard } from "./OrderSheetEmptyCard";
 import { OrderSheetFoodItem } from "./OrderSheetFoodItem";
-import { Category, Food } from "@/types/types";
+import { Category, Food, FoodItem } from "@/types/types";
 
 export const cartData = [
   {
@@ -22,11 +22,11 @@ export const cartData = [
   },
 ];
 
-type OrderSheetCartProps = {
-  food: Category;
-};
+// type OrderSheetCartProps = {
+//   food: FoodItem;
+// };
 
-export const OrderSheetCart = ({ food }: OrderSheetCartProps) => {
+export const OrderSheetCart = () => {
   const renderFoodCard = () => {
     if (cartData?.length) {
       return cartData?.map((item) => {

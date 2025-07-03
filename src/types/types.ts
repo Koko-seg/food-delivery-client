@@ -5,6 +5,7 @@ export type Category = {
   updatedAt: string;
   v: number;
   foods: Food[];
+  count: number;
 };
 
 export type Food = {

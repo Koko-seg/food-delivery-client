@@ -75,7 +75,7 @@ export const AddFoodModal = ({
         category: categoryId,
       });
 
-      toast.success(`Food ${food.foodInfo} created successfully`);
+      toast.success(`Food created successfully`);
     } catch (error) {
       toast.error(`Failed to create category ${error}`);
       console.log(error);

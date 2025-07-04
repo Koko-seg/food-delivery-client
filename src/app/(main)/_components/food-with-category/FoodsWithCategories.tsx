@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 export const FoodsWithCategories = () => {
   const [foodWithCategories, setFoodWithCategories] = useState<Category[]>([]);
   useEffect(() => {
-    const getCategories = async () => {
+    const getFoods = async () => {
       const response = await fetch("http://localhost:3800/food/");
       const data = await response.json();
       console.log("foodWithCategories: ", data);
 
-      setFoodWithCategories(data.foods);
+      setFoodWithCategories(data.foodWithCategories);
     };
-    getCategories();
+    getFoods();
   }, []);
 
   if (!foodWithCategories?.length) return null;

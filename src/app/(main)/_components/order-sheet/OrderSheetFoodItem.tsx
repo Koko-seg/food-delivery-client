@@ -8,10 +8,12 @@ import Image from "next/image";
 type OrderSheetFoodItemProps = {
   food: FoodItem;
   quantity: number;
+  price: number;
 };
 export const OrderSheetFoodItem = ({
   food,
   quantity,
+  price,
 }: OrderSheetFoodItemProps) => {
   return (
     <>
@@ -55,7 +57,7 @@ export const OrderSheetFoodItem = ({
               </Button>
             </div>
 
-            <h4 className="font-bold">12₮</h4>
+            <h4 className="font-bold">{price * quantity}₮</h4>
           </div>
         </div>
       </div>

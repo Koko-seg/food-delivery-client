@@ -2,39 +2,40 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrderSheetEmptyCard } from "./OrderSheetEmptyCard";
 import { OrderSheetFoodItem } from "./OrderSheetFoodItem";
 import { Category, Food, FoodItem } from "@/types/types";
+import { useContext } from "react";
+import { FoodCartContext } from "@/providers/FoodCart";
 
-export const cartData = [
-  {
-    food: {
-      _id: 1,
-      foodName: "",
-      price: "",
-      image: "",
-      ingredients: "",
-      categoryId: {
-        _id: "1",
-        categoryName: "categoryName",
-        createdAt: "2025-06-27T17:00:00+08:00",
-        updatedAt: "2025-06-22T17:00:00+08:00",
-      },
-    },
-    quantity: 1,
-  },
-];
-
-// type OrderSheetCartProps = {
-//   food: FoodItem;
-// };
+// export const cartData = [
+//   {
+//     food: {
+//       _id: 1,
+//       foodName: "",
+//       price: "",
+//       image: "",
+//       ingredients: "",
+//       categoryId: {
+//         _id: "1",
+//         categoryName: "categoryName",
+//         createdAt: "2025-06-27T17:00:00+08:00",
+//         updatedAt: "2025-06-22T17:00:00+08:00",
+//       },
+//     },
+//     quantity: 1,
+//   },
+// ];
 
 export const OrderSheetCart = () => {
+  const { foodCart } = useContext(FoodCartContext);
+  console.log("foodCart", foodCart);
   const renderFoodCard = () => {
-    if (cartData?.length) {
-      return cartData?.map((item) => {
+    if (foodCart?.length) {
+      return foodCart?.map((item) => {
         return (
           <OrderSheetFoodItem
             key={item.food._id}
             food={item.food}
             quantity={item.quantity}
+            price={item.price}
           />
         );
       });

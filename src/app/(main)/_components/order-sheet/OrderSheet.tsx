@@ -6,6 +6,8 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart } from "lucide-react";
 import { OrderSheetContents } from ".";
+import { useContext } from "react";
+import { FoodCartContext } from "@/providers/FoodCart";
 
 type OrderSheetProps = {
   open: boolean;

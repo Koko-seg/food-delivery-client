@@ -18,6 +18,7 @@ export type Food = {
   createdAt: string;
   updatedAt: string;
   v: number;
+  quantity: number;
 };
 
 export type FoodItem = {
@@ -25,4 +26,16 @@ export type FoodItem = {
   image: string;
   ingredients: string;
   price: number;
+};
+
+export type Order = {
+  _id: string;
+  foodName: string;
+  orderNumber: string;
+  status: string;
+  date: string;
+  address: string;
+  food: Food;
+  quantity: number;
+  totalPrice: number;
 };

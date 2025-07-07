@@ -11,11 +11,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Food, FoodItem } from "@/types/types";
+import { FoodCartContext } from "@/providers/FoodCart";
 
 type FoodDetailModalProps = {
-  food: FoodItem;
+  food: Food;
   isModalOpen: boolean;
   onToggleModal: () => void;
 };
@@ -26,6 +27,7 @@ export const FoodDetailModal = ({
   onToggleModal,
 }: FoodDetailModalProps) => {
   const [quantity, setQuantity] = useState<number>(1);
+  const { setFoodCart } = useContext(FoodCartContext);
   const { foodName, image, ingredients, price } = food;
 
   const addQuantity = () => {
@@ -37,6 +39,13 @@ export const FoodDetailModal = ({
   };
 
   const handleAddToCart = () => {
+    setFoodCart([
+      {
+        food: food,
+        quantity: quantity,
+        price: price,
+      },
+    ]);
     setQuantity(1);
     onToggleModal();
   };
@@ -81,7 +90,7 @@ export const FoodDetailModal = ({
                     Total price:
                   </p>
                   <div className="text-lg font-semibold text-[#09090B]">
-                    <p>${price * quantity}</p>
+                    <p>{price * quantity}₮</p>
                   </div>
                 </div>
                 <div className="flex w-[121px] justify-around">

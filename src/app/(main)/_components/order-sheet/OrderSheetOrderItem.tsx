@@ -4,6 +4,7 @@ import { Map, Soup, Timer } from "lucide-react";
 
 type OrderSheetOrderItemProps = {
   order: Order;
+  quantity: number;
 };
 
 export const OrderSheetOrderItem = ({ order }: OrderSheetOrderItemProps) => {
@@ -20,16 +21,14 @@ export const OrderSheetOrderItem = ({ order }: OrderSheetOrderItemProps) => {
       <div className="flex item-center justify-between">
         <div className="flex item-center gap-2">
           <Soup strokeWidth={1} size={16} />
-          <p className="text-muted-foreground text-xs">
-            {order?.food.foodName}
-          </p>
+          <p className="text-muted-foreground text-xs">{order?.foodName}</p>
         </div>
         <p className="text-muted-foreground text-xs">x 1</p>
       </div>
 
       <div className="flex item-center gap-2">
         <Timer strokeWidth={1} size={16} />
-        <p className="text-muted-foreground text-xs">2024/12/24</p>
+        <p className="text-muted-foreground text-xs">2025.07.11</p>
       </div>
 
       <div className="flex item-center gap-2">

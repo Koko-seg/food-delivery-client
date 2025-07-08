@@ -7,29 +7,15 @@ import { MouseEventHandler, useState } from "react";
 import { Button } from "../ui/button";
 import { AddToCartAlert } from "./AddToCartAlert";
 import { FoodDetailModal } from "./FoodDetailModal";
+import { Food } from "@/types/types";
+import { FoodType } from "@/constants/food";
 
 type FoodCardProps = {
-  foodName: string;
-  price: number;
-  ingredients: string;
-  image: string;
-  _id: string;
+  food: FoodType;
 };
 
-export const FoodCard = ({
-  foodName,
-  ingredients,
-  image,
-  price,
-}: FoodCardProps) => {
-  const food = {
-    _id: "1",
-    foodName,
-    price,
-    image,
-    ingredients,
-  };
-
+export const FoodCard = ({ food }: FoodCardProps) => {
+  const { foodName, image, ingredients, price } = food;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
 

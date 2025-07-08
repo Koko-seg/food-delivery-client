@@ -25,8 +25,13 @@ import { FoodCartContext } from "@/providers/FoodCart";
 // ];
 
 export const OrderSheetCart = () => {
-  const { foodCart } = useContext(FoodCartContext);
+  const { foodCart, setFoodCart } = useContext(FoodCartContext);
   console.log("foodCart", foodCart);
+
+  const handleRemoveFromCart = (id: string) => {
+    setFoodCart((prev) => prev.filter((item) => item.food._id !== id));
+  };
+
   const renderFoodCard = () => {
     if (foodCart?.length) {
       return foodCart?.map((item) => {
@@ -35,7 +40,7 @@ export const OrderSheetCart = () => {
             key={item.food._id}
             food={item.food}
             quantity={item.quantity}
-            price={item.price}
+            onRemove={handleRemoveFromCart}
           />
         );
       });

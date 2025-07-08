@@ -1,19 +1,20 @@
 import { SidebarDashLine } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { FoodType } from "@/constants/food";
 import { Category, Food, FoodItem } from "@/types/types";
 
 import { CircleX, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 
 type OrderSheetFoodItemProps = {
-  food: FoodItem;
+  food: FoodType;
   quantity: number;
-  price: number;
+  onRemove: (id: string) => void;
 };
 export const OrderSheetFoodItem = ({
   food,
   quantity,
-  price,
+  onRemove,
 }: OrderSheetFoodItemProps) => {
   return (
     <>
@@ -41,6 +42,7 @@ export const OrderSheetFoodItem = ({
               size={50}
               color="red"
               className="cursor-pointer"
+              onClick={() => onRemove(food._id)}
             />
           </div>
 
@@ -57,7 +59,7 @@ export const OrderSheetFoodItem = ({
               </Button>
             </div>
 
-            <h4 className="font-bold">{price * quantity}₮</h4>
+            <h4 className="font-bold">{food.price * quantity}₮</h4>
           </div>
         </div>
       </div>

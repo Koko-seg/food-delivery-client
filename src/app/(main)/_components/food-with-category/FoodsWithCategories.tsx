@@ -35,11 +35,12 @@ export const FoodsWithCategories = () => {
               return (
                 <div key={food?._id}>
                   <FoodCard
-                    foodName={food?.foodName}
-                    price={food?.price}
-                    image={food?.image}
-                    ingredients={food?.ingredients}
-                    _id={food?._id}
+                    // foodName={food?.foodName}
+                    // price={food?.price}
+                    // image={food?.image}
+                    // ingredients={food?.ingredients}
+                    // _id={food?._id}
+                    food={food}
                   />
                 </div>
               );

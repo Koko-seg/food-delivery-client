@@ -3,22 +3,20 @@ export type Category = {
   categoryName: string;
   createdAt: string;
   updatedAt: string;
-  v: number;
+  __v: number;
   foods: Food[];
-  count: number;
 };
 
 export type Food = {
   _id: string;
   foodName: string;
-  category: string;
+  category: Category;
   price: number;
   image: string;
   ingredients: string;
   createdAt: string;
   updatedAt: string;
-  v: number;
-  quantity: number;
+  __v: number;
 };
 
 export type FoodItem = {

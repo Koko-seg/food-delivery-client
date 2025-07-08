@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrderSheetOrderItem } from ".";
-import { Food, Order } from "@/types/types";
 
 export const OrderSheetOrders = () => {
   return (

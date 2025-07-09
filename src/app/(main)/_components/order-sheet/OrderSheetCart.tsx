@@ -31,6 +31,13 @@ export const OrderSheetCart = () => {
   const handleRemoveFromCart = (id: string) => {
     setFoodCart((prev) => prev.filter((item) => item.food._id !== id));
   };
+  const handleChangeQuantity = (id: string, newQuantity: number) => {
+    setFoodCart((prev) =>
+      prev.map((item) =>
+        item.food._id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
 
   const renderFoodCard = () => {
     if (foodCart?.length) {
@@ -41,6 +48,7 @@ export const OrderSheetCart = () => {
             food={item.food}
             quantity={item.quantity}
             onRemove={handleRemoveFromCart}
+            onChangeQuantity={handleChangeQuantity}
           />
         );
       });

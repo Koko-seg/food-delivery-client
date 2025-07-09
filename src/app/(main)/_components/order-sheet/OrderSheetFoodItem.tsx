@@ -5,17 +5,29 @@ import { Category, Food, FoodItem } from "@/types/types";
 
 import { CircleX, Minus, Plus } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 type OrderSheetFoodItemProps = {
   food: FoodType;
   quantity: number;
   onRemove: (id: string) => void;
+  onChangeQuantity: (id: string, newQuantity: number) => void;
 };
 export const OrderSheetFoodItem = ({
   food,
   quantity,
   onRemove,
+  onChangeQuantity,
 }: OrderSheetFoodItemProps) => {
+  const addQuantity = () => {
+    onChangeQuantity(food._id, quantity + 1);
+  };
+
+  const subtractQuantity = () => {
+    if (quantity > 1) {
+      onChangeQuantity(food._id, quantity - 1);
+    }
+  };
   return (
     <>
       <div className="flex gap-3">
@@ -48,13 +60,19 @@ export const OrderSheetFoodItem = ({
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <Button variant="ghost">
+              <Button
+                variant="ghost"
+                onClick={() => onChangeQuantity(food._id, quantity - 1)}
+              >
                 <Minus />
               </Button>
 
               <div className="text-lg font-semibold">{quantity}</div>
 
-              <Button variant="ghost">
+              <Button
+                variant="ghost"
+                onClick={() => onChangeQuantity(food._id, quantity + 1)}
+              >
                 <Plus />
               </Button>
             </div>

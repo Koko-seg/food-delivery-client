@@ -5,25 +5,6 @@ import { Category, Food, FoodItem } from "@/types/types";
 import { useContext } from "react";
 import { FoodCartContext } from "@/providers/FoodCart";
 
-// export const cartData = [
-//   {
-//     food: {
-//       _id: 1,
-//       foodName: "",
-//       price: "",
-//       image: "",
-//       ingredients: "",
-//       categoryId: {
-//         _id: "1",
-//         categoryName: "categoryName",
-//         createdAt: "2025-06-27T17:00:00+08:00",
-//         updatedAt: "2025-06-22T17:00:00+08:00",
-//       },
-//     },
-//     quantity: 1,
-//   },
-// ];
-
 export const OrderSheetCart = () => {
   const { foodCart, setFoodCart } = useContext(FoodCartContext);
   console.log("foodCart", foodCart);

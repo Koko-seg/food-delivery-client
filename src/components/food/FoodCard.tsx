@@ -7,11 +7,12 @@ import { MouseEventHandler, useState } from "react";
 import { Button } from "../ui/button";
 import { AddToCartAlert } from "./AddToCartAlert";
 import { FoodDetailModal } from "./FoodDetailModal";
-import { Food } from "@/types/types";
+
 import { FoodType } from "@/constants/food";
+import { Food } from "@/types/types";
 
 type FoodCardProps = {
-  food: FoodType;
+  food: Food;
 };
 
 export const FoodCard = ({ food }: FoodCardProps) => {

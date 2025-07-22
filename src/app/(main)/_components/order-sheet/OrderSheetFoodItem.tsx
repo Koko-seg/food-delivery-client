@@ -60,10 +60,7 @@ export const OrderSheetFoodItem = ({
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <Button
-                variant="ghost"
-                onClick={() => onChangeQuantity(food._id, quantity - 1)}
-              >
+              <Button variant="ghost" onClick={subtractQuantity}>
                 <Minus />
               </Button>
 

@@ -31,7 +31,7 @@ export const OrderSheetPayment = ({ openModal }: { openModal: () => void }) => {
 
         <div className="flex justify-between">
           <p className="text-[#71717A] font-light">Total</p>
-          <p className="font-bold">{89}</p>
+          <p className="font-bold">{}</p>
         </div>
       </CardContent>
 

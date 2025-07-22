@@ -40,13 +40,31 @@ export const FoodDetailModal = ({
   };
 
   const handleAddToCart = () => {
-    setFoodCart([
-      ...foodCart,
-      {
-        food,
-        quantity,
-      },
-    ]);
+    const existingFood = foodCart.find(
+      ({ food: cartFood }) => cartFood._id === food._id
+    );
+
+    if (existingFood) {
+      const updatedCart = foodCart.map((item) => {
+        if (item.food._id === food._id) {
+          return {
+            ...item,
+            quantity: item.quantity + quantity,
+          };
+        }
+        return item;
+      });
+
+      setFoodCart(updatedCart);
+    } else {
+      setFoodCart([
+        ...foodCart,
+        {
+          food,
+          quantity,
+        },
+      ]);
+    }
     setQuantity(1);
     onToggleModal();
   };

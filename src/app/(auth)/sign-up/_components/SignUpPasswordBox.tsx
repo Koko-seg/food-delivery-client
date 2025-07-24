@@ -8,26 +8,80 @@ import { SignUpFooter } from "./SignUpFooter";
 import { DynamicCardHeader } from "@/components/card";
 import { BackButton } from "@/components/button";
 import { FooterButtons } from "@/components/auth";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
+const emailSchema = Yup.object({
+  password: Yup.string().required("хоосон байна"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), undefined], "Passwords must match")
+    .required(),
+});
 
 type PasswordBoxProps = {
-  values: { password: string; passwordConfirmation: string };
-  errors: { password?: string; passwordConfirmation?: string };
-  touched: { password?: boolean; passwordConfirmation?: boolean };
-  handleChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (_event: React.FocusEvent<HTMLInputElement>) => void;
-  handleCreateAccount: () => void;
+  email: string;
   handleBack: () => void;
 };
+const handleSignup = async (email: string, password: string) => {
+  const response = await axios.post("http://localhost:3800/user", {
+    email,
+    password,
+    address: "ub",
+    phoneNumber: "99121212",
+  });
 
-export const SignUpPasswordBox = ({
-  values,
-  errors,
-  touched,
-  handleChange,
-  handleBlur,
-  handleCreateAccount,
-  handleBack,
-}: PasswordBoxProps) => {
+  return response;
+};
+
+export const SignUpPasswordBox = ({ email, handleBack }: PasswordBoxProps) => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const formik = useFormik({
+    initialValues: {
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: emailSchema,
+    onSubmit: async (values) => {
+      console.log(values);
+      try {
+        setLoading(true);
+        const response = await handleSignup(email, values.password);
+
+        router.push("/login");
+        console.log("response:", response);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    },
+  });
+
+  const { values, handleChange, handleBlur, touched, errors, handleSubmit } =
+    formik;
+
+  const passwordInputProps = {
+    name: "password",
+    placeholder: "password",
+    value: values.password,
+    onChange: handleChange,
+    onBlur: handleBlur,
+    inputError: touched.password && errors.password,
+    inputErrorMessage: errors.password,
+  };
+
+  const confirmPasswordInputProps = {
+    name: "confirmPassword",
+    placeholder: "confirmPassword",
+    value: values.confirmPassword,
+    onChange: handleChange,
+    onBlur: handleBlur,
+    inputError: touched.confirmPassword && errors.confirmPassword,
+    inputErrorMessage: errors.password,
+  };
   return (
     <Card className="w-[416px] border-none shadow-none gap-6 flex flex-col">
       <BackButton handleClick={handleBack} />
@@ -38,11 +92,11 @@ export const SignUpPasswordBox = ({
       />
 
       <CardContent className="p-0">
-        <form onSubmit={handleCreateAccount} className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="grid items-center w-full gap-6">
             <div className="flex flex-col space-y-1.5 gap-4">
-              <FormInput />
-              <FormInput />
+              <FormInput {...passwordInputProps} />
+              <FormInput {...confirmPasswordInputProps} />
 
               <div className="flex items-center space-x-2">
                 <Checkbox id="showPass" />
@@ -55,7 +109,7 @@ export const SignUpPasswordBox = ({
               </div>
             </div>
           </div>
-          <FooterButtons buttonText="Let`s Go" />
+          <FooterButtons buttonDisable={loading} buttonText="Let`s Go" />
         </form>
       </CardContent>
 

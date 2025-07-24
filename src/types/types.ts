@@ -25,15 +25,3 @@ export type FoodItem = {
   ingredients: string;
   price: number;
 };
-
-export type Order = {
-  _id: string;
-  foodName: string;
-  orderNumber: string;
-  status: string;
-  date: string;
-  address: string;
-  food: Food;
-  quantity: number;
-  totalPrice: number;
-};

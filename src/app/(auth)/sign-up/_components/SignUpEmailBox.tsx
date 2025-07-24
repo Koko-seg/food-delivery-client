@@ -5,26 +5,36 @@ import { DynamicCardHeader } from "@/components/card";
 import { Card, CardContent } from "@/components/ui/card";
 import { FormInput } from "../../../../components/dynamic-inputs";
 import { SignUpFooter } from "./SignUpFooter";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
+const emailSchema = Yup.object({
+  email: Yup.string().email().required(),
+});
 type EmailBoxProps = {
-  values: { email: string };
-  errors: { email?: string };
-  touched: { email?: boolean };
-  handleChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (_event: React.FocusEvent<HTMLInputElement>) => void;
   handleNext: () => void;
+  onChangeEmail: (_email: string) => void;
 };
 
 export const SignUpEmailBox = ({
-  values,
-  errors,
-  touched,
-  handleChange,
-  handleBlur,
   handleNext,
+  onChangeEmail,
 }: EmailBoxProps) => {
-  const formError = touched.email && errors.email;
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: emailSchema,
+    onSubmit: (values) => {
+      onChangeEmail(values.email);
+      handleNext();
+    },
+  });
 
+  const { values, handleChange, handleBlur, touched, errors, handleSubmit } =
+    formik;
+
+  const formError = touched.email && errors.email;
   const emailInputProps = {
     name: "email",
     placeholder: "Email",
@@ -34,7 +44,6 @@ export const SignUpEmailBox = ({
     inputError: formError,
     inputErrorMessage: errors.email,
   };
-
   return (
     <Card className="w-[416px] border-none shadow-none gap-6 flex flex-col">
       <DynamicCardHeader
@@ -42,7 +51,7 @@ export const SignUpEmailBox = ({
         description="Sign up to explore your favorite dishes."
       />
       <CardContent className="p-0">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-6">
             <div className="grid items-center w-full gap-6">
               <FormInput {...emailInputProps} />

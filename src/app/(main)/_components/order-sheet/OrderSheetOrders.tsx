@@ -1,7 +1,27 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrderSheetOrderItem } from ".";
 import { useEffect, useState } from "react";
-import { Order } from "@/types/types";
+import { Food } from "@/types/types";
+
+export type Order = {
+  _id: string;
+  user: string;
+  totalPrice: number;
+  foodOrderItems: {
+    food: Food;
+    quantity: number;
+    price: string;
+    _id: string;
+  }[];
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+type OrderResponse = {
+  success: boolean;
+  foodOrder: Order[];
+};
 
 export const OrderSheetOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -22,7 +42,9 @@ export const OrderSheetOrders = () => {
       </CardHeader>
 
       <CardContent className="p-4">
-        <OrderSheetOrderItem key={order._id} {...order} />
+        {orders.map((order) => {
+          return <OrderSheetOrderItem key={order._id} {...order} />;
+        })}
       </CardContent>
     </Card>
   );

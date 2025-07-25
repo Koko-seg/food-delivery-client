@@ -13,7 +13,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const emailSchema = Yup.object({
+const PasswordSchema = Yup.object({
   password: Yup.string().required("хоосон байна"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), undefined], "Passwords must match")
@@ -44,7 +44,7 @@ export const SignUpPasswordBox = ({ email, handleBack }: PasswordBoxProps) => {
       password: "",
       confirmPassword: "",
     },
-    validationSchema: emailSchema,
+    validationSchema: PasswordSchema,
     onSubmit: async (values) => {
       console.log(values);
       try {
